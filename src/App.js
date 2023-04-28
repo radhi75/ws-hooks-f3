@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+
+import { useState,useEffect } from 'react';
 import './App.css';
+import moviesData from './assets/Data';
+import MovieList from './Components/MovieList';
+import Navigation from './Components/Navigation';
+import AddMovie from './Components/AddMovie';
 
 function App() {
+  const [counter,setCounter]=useState(0)
+  const [isShow,setShow]=useState(true)
+  const [data,setData]=useState(moviesData)
+  const handleClick=()=>setShow(!isShow)
+  const [search,setSearch]=useState("")
+  const [rate,setRate]=useState(0)
+  useEffect(() => {
+  alert("hello world")
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {/* <button onClick={handleClick}>Click</button> */}
+    <Navigation setSearch={setSearch} setRate={setRate} rate={rate}/>
+    <AddMovie setData={setData} data={data}/>
+    <MovieList data={data} search={search} rate={rate}/>
+    {/* {isShow && <div>
+    <button onClick={()=>setCounter(counter+1)}>+</button>
+    <span>{counter}</span>
+    <button onClick={()=>counter>0?setCounter(counter-1):counter}>-</button></div>} */}
     </div>
   );
 }
